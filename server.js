@@ -9,9 +9,8 @@ app.use(compression());
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.headers);
-    if (req.headers['X-RapidAPI-Proxy-Secret'] !== process.env.ApiProxySecret) {
-        res.status(401);
+    if (req.headers['x-rapidapi-proxy-secret'] !== process.env.ApiProxySecret) {
+        res.status(401).json({ success: false, response: 'ERROR: Invalid or missing credentials.' });
     } else {
         next();
     }
