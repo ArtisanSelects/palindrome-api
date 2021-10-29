@@ -9,7 +9,7 @@ app.use(compression());
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.headers["X-RapidAPI-Proxy-Secret"]);
+    console.log(req.headers);
     if (req.headers['X-RapidAPI-Proxy-Secret'] !== process.env.ApiProxySecret) {
         res.status(401);
     } else {
