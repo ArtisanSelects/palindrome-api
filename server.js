@@ -9,6 +9,6 @@ app.use(compression());
 app.use(express.json());
 
 app.use("/:palindrome", APIController.palindrome_get);
-app.use("*", (req, res) => res.json({ success: false, response: 'ERROR: No palindrome supplied.' }));
+app.use("*", (req, res) => res.status(400).json({ success: false, response: 'ERROR: No palindrome supplied.' }));
 
 export default app;
