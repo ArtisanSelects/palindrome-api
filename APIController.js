@@ -7,10 +7,16 @@ export default class APIController {
         (req, res) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                res.json({ response: 'ERROR: No palindrome supplied.' });
+                res.json({ success: false, response: 'ERROR: No palindrome supplied.' });
+                return;
+            }
+
+            const isPalindrome = req.params.palindrome === req.params.palindrome.split("").reverse().join("");
+            if (isPalindrome === true || isPalindrome === false) {
+                res.json({ success: true, response: isPalindrome });
             } else {
-                res.json({ response: req.params.palindrome === req.params.palindrome.split("").reverse().join("") });
-            }     
+                res.json({ success: true, response: 'ERROR: Unable to parse string.' });
+            }    
         }
     ];
 
